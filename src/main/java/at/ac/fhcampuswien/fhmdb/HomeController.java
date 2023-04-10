@@ -19,6 +19,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.function.ToDoubleBiFunction;
 
 public class HomeController implements Initializable {
     @FXML
@@ -32,6 +33,10 @@ public class HomeController implements Initializable {
 
     @FXML
     public JFXComboBox genreComboBox;
+
+    public JFXComboBox releaseYearComboBox;
+
+    public JFXComboBox ratingComboBox;
 
     @FXML
     public JFXButton sortBtn;
@@ -63,15 +68,33 @@ public class HomeController implements Initializable {
         genreComboBox.getItems().add("No filter");  // add "no filter" to the combobox
         genreComboBox.getItems().addAll(genres);    // add all genres to the combobox
         genreComboBox.setPromptText("Filter by Genre");
+
+
+        //TODO: ~Implement .addAll
+        // Needs to fetch the data from the MovieAPI class!
+        // 1. Beim Starten der FHMDb App sollen alle Filme der MovieAPI, ohne weitere Filterkriterien, geladen werden: https://prog2.fh-campuswien.ac.at/movies
+        // MovieApi.class is responsible for creating the correct Url AND making the request
+
+
+        releaseYearComboBox.getItems().add("No filter");  // add "no filter" to the combobox
+        releaseYearComboBox.setPromptText("Filter by Release Year");
+        //   releaseYearComboBox.getItems().addAll(genres);    // add all release years to the combobox
+
+
+        ratingComboBox.getItems().add("No filter");  // add "no filter" to the combobox
+        ratingComboBox.setPromptText("Filter by Rating");
+        //   ratingComboBox.getItems().addAll(genres);    // add all ratings to the combobox
+
     }
 
-    public void sortMovies(){
+    public void sortMovies() {
         if (sortedState == SortedState.NONE || sortedState == SortedState.DESCENDING) {
             sortMovies(SortedState.ASCENDING);
         } else if (sortedState == SortedState.ASCENDING) {
             sortMovies(SortedState.DESCENDING);
         }
     }
+
     // sort movies based on sortedState
     // by default sorted state is NONE
     // afterwards it switches between ascending and descending
@@ -85,26 +108,26 @@ public class HomeController implements Initializable {
         }
     }
 
-    public List<Movie> filterByQuery(List<Movie> movies, String query){
-        if(query == null || query.isEmpty()) return movies;
+    public List<Movie> filterByQuery(List<Movie> movies, String query) {
+        if (query == null || query.isEmpty()) return movies;
 
-        if(movies == null) {
+        if (movies == null) {
             throw new IllegalArgumentException("movies must not be null");
         }
 
         return movies.stream()
                 .filter(Objects::nonNull)
                 .filter(movie ->
-                    movie.getTitle().toLowerCase().contains(query.toLowerCase()) ||
-                    movie.getDescription().toLowerCase().contains(query.toLowerCase())
+                        movie.getTitle().toLowerCase().contains(query.toLowerCase()) ||
+                                movie.getDescription().toLowerCase().contains(query.toLowerCase())
                 )
                 .toList();
     }
 
-    public List<Movie> filterByGenre(List<Movie> movies, Genre genre){
-        if(genre == null) return movies;
+    public List<Movie> filterByGenre(List<Movie> movies, Genre genre) {
+        if (genre == null) return movies;
 
-        if(movies == null) {
+        if (movies == null) {
             throw new IllegalArgumentException("movies must not be null");
         }
 
