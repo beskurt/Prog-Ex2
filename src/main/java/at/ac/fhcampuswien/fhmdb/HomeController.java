@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Comparator;
 import java.util.List;
@@ -49,11 +50,15 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeState();
+        try {
+            initializeState();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         initializeLayout();
     }
 
-    public void initializeState() {
+    public void initializeState() throws IOException {
         allMovies = Movie.initializeMovies();
         observableMovies.clear();
         observableMovies.addAll(allMovies); // add all movies to the observable list
@@ -70,10 +75,6 @@ public class HomeController implements Initializable {
         genreComboBox.setPromptText("Filter by Genre");
 
 
-        //TODO: ~Implement .addAll
-        // Needs to fetch the data from the MovieAPI class!
-        // 1. Beim Starten der FHMDb App sollen alle Filme der MovieAPI, ohne weitere Filterkriterien, geladen werden: https://prog2.fh-campuswien.ac.at/movies
-        // MovieApi.class is responsible for creating the correct Url AND making the request
 
 
         releaseYearComboBox.getItems().add("No filter");  // add "no filter" to the combobox
