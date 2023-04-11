@@ -207,7 +207,6 @@ public class HomeController implements Initializable {
         sortMovies();
     }
 
-}
 
 //TODO Weiters sind folgende Methoden unter Verwendung von Streams im Controller zu implementieren:
 //         String getMostPopularActor(List<Movie> movies): gibt jene Person zurück, die am
@@ -220,7 +219,6 @@ public class HomeController implements Initializable {
 //        endYear): gibt jene Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht
 //        wurden.
 //        Die Funktionen sind ausschließlich mit Streams zu implementieren (keine Schleifen!)
-
 
 
     String getMostPopularActor(List<Movie> movies) {
