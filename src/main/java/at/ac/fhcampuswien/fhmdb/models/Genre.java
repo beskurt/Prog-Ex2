@@ -1,5 +1,7 @@
 package at.ac.fhcampuswien.fhmdb.models;
 
+
+//TODO Syncronize the Genres with the data from the API
 public enum Genre {
     ACTION,
     ADVENTURE,

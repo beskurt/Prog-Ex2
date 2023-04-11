@@ -14,16 +14,22 @@ public class MovieCell extends ListCell<Movie> {
     private final Label title = new Label();
     private final Label detail = new Label();
     private final Label genre = new Label();
+
+
     private final VBox layout = new VBox(title, detail, genre);
+
+
 
     @Override
     protected void updateItem(Movie movie, boolean empty) {
+
         super.updateItem(movie, empty);
 
         if (empty || movie == null) {
             setGraphic(null);
             setText(null);
         } else {
+
             this.getStyleClass().add("movie-cell");
             title.setText(movie.getTitle());
             detail.setText(
@@ -37,6 +43,9 @@ public class MovieCell extends ListCell<Movie> {
                     .map(Enum::toString)
                     .collect(Collectors.joining(", "));
             genre.setText(genres);
+
+
+
 
 
             // color scheme
@@ -53,7 +62,29 @@ public class MovieCell extends ListCell<Movie> {
             layout.setPadding(new Insets(10));
             layout.spacingProperty().set(10);
             layout.alignmentProperty().set(javafx.geometry.Pos.CENTER_LEFT);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             setGraphic(layout);
+
+
+
+
+
+
+
+
         }
     }
 }

@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Movie {
-    //    private final String title;
-    //    private final String description;
-    //    private final List<Genre> genres;
     private final String id;
     private final String title;
     private final List<Genre> genres;
@@ -65,15 +62,54 @@ public class Movie {
         return genres;
     }
 
-    public static List<Movie> initializeMovies() throws IOException {
+    public String getId() {
+        return id;
+    }
 
+    public int getReleaseYear() {
+        return releaseYear;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public int getLengthInMinutes() {
+        return lengthInMinutes;
+    }
+
+    public List<String> getDirectors() {
+        return directors;
+    }
+
+    public List<String> getWriters() {
+        return writers;
+    }
+
+    public List<String> getMainCast() {
+        return mainCast;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+
+
+
+
+
+
+    public static List<Movie> initializeMovies() throws IOException {
 
         List<Movie> movies;
 
-
         // ".get()" == returns a List<Movie> containing all(!!!!) movies the Api gave us.
         MovieApi movieApi = new MovieApi();
-        movies = movieApi.getAllMoviesFromApi();
+        movies = movieApi.getAllMoviesFromApi("http://localhost:8080/movies");
+
+
+
 
 
         //        movies.add(new Movie(
