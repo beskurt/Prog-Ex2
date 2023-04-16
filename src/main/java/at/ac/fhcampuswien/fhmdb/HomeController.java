@@ -110,7 +110,7 @@ public class HomeController implements Initializable {
 
 
         // Released Year
-
+        // find
         // add all release years to the combobox
         List<Integer> uniqueYears = years.stream().distinct().collect(Collectors.toList());
         releaseYearComboBox.getItems().addAll(uniqueYears);

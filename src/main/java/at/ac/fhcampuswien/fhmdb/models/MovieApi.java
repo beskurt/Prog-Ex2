@@ -18,7 +18,7 @@ public class MovieApi {
     public String createUrl(String query, String genre, String year, String rating) {
         StringBuilder url = new StringBuilder("http://localhost:8080/movies");
 
-
+        // TODO: Make working Filters (no ors, we need ands).
         if (!query.isEmpty()  ) {               //TODO Disallow Numbers and Special character in query
 
             // ReplaceAll Whitespaces and Tabs with "%20"
