@@ -9,32 +9,25 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class MovieApi {
 
 
-    // if you make this function happy you get a sexy Url
-    public String createUrl(String query, String genre, String releaseYear, String ratingFrom) {
+    // creates url, print optional to show url in terminal
+    public String createUrl(String query, String genre, String year, String rating) {
         StringBuilder url = new StringBuilder("http://localhost:8080/movies");
 
-        if (!query.isEmpty()  ) {               //TODO Disallow Numbers and Special character in query
-
-            // ReplaceAll Whitespaces and Tabs with "%20"
-            url.append("?query=").append(query.replaceAll("\\p{Blank}","%20")).append("&");
-        }
+        // TODO: Maybe numbers and Symbols restriction
+        url.append("?query=").append(query);
         if (!genre.isEmpty()) {
-            url.append("?genre=").append(genre).append("&");
+            url.append("&genre=").append(genre);
         }
-        if (!releaseYear.isEmpty()) {
-            url.append("?releaseYear=").append(releaseYear).append("&");
+        if (!year.isEmpty()) {
+            url.append("&releaseYear=").append(year);
         }
-
-        if (!ratingFrom.isEmpty()) {
-            url.append("?ratingFrom=").append(ratingFrom).append("&");
-        }
-        // Remove the trailing "&" character if there are any parameters
-        if (url.charAt(url.length() - 1) == '&') {
-            url.setLength(url.length() - 1);
+        if (!rating.isEmpty()) {
+            url.append("&ratingFrom=").append(rating);
         }
         System.out.println(url);
         return url.toString();
