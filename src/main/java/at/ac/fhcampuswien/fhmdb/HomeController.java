@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class HomeController implements Initializable {
 
@@ -110,16 +111,20 @@ public class HomeController implements Initializable {
 
         // Released Year
 
-
-        releaseYearComboBox.getItems().addAll(years);    // add all genres to the combobox
+        // add all release years to the combobox
+        List<Integer> uniqueYears = years.stream().distinct().collect(Collectors.toList());
+        releaseYearComboBox.getItems().addAll(uniqueYears);
+        releaseYearComboBox.getItems().sort(Comparator.reverseOrder());
         releaseYearComboBox.getItems().add("No filter");  // add "no filter" to the combobox
         releaseYearComboBox.setPromptText("Filter by Release Year");
 
 
         // RATING
 
-
-        ratingComboBox.getItems().addAll(ratings);    // add all genres to the combobox
+        // add all ratings to the combobox
+        List<Double> uniqueRatings = ratings.stream().distinct().collect(Collectors.toList());
+        ratingComboBox.getItems().addAll(uniqueRatings);
+        ratingComboBox.getItems().sort(Comparator.reverseOrder());
         ratingComboBox.getItems().add("No filter");  // add "no filter" to the combobox
         ratingComboBox.setPromptText("Filter by Rating");
 
@@ -222,7 +227,17 @@ public class HomeController implements Initializable {
 
 
     String getMostPopularActor(List<Movie> movies) {
-        return null;
+
+        List<String> actors = movies.stream()
+                .flatMap(movie -> movie.getMainCast().stream()).toList();
+
+        Map<String, Long> actorCounts = actors.stream()
+                .collect(Collectors.groupingBy(actor -> actor, Collectors.counting()));
+
+        Optional<Map.Entry<String, Long>> mostPopularActor = actorCounts.entrySet().stream()
+                .max(Map.Entry.comparingByValue());
+        return mostPopularActor.map(Map.Entry::getKey).orElse(null);
+
     }
 
     int getLongestMovieTitle(List<Movie> movies) {
