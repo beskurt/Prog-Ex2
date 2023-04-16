@@ -38,7 +38,7 @@
          <Label fx:id="countLabel" styleClass="text-white" prefHeight="25.0" />
          <JFXComboBox fx:id="genreComboBox" focusColor="#f5c518" styleClass="filter-combo-box" stylesheets="@styles.css" />
          <JFXComboBox fx:id="ratingComboBox" focusColor="#f5c518" styleClass="filter-combo-box" stylesheets="@styles.css" />
-         <JFXButton fx:id="searchBtn" styleClass="background-yellow" stylesheets="@styles.css" text="Filter" onAction="#searchBtnClicked"/>
+         <JFXButton fx:id="filterBtn" styleClass="background-yellow" stylesheets="@styles.css" text="Filter" onAction="#filterBtnClicked"/>
       </children>
       <VBox.margin>
          <Insets />

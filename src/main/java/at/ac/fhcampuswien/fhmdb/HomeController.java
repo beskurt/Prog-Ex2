@@ -9,7 +9,6 @@ import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -71,21 +70,17 @@ public class HomeController implements Initializable {
 
     }
 
-    static ArrayList<Double> ratings = new ArrayList<Double>();
-    static ArrayList<Integer> years = new ArrayList<Integer>();
+    static List<Double> ratings = new ArrayList<>();
+    static List<Integer> years = new ArrayList<>();
 
 
     public static void extractDropdownMenuItemsFromApi(List<Movie> movies) {
-
-
-        for (int i = 0; i < movies.size(); i++) {
-
-
-            years.add(movies.get(i).getReleaseYear());
-            ratings.add(movies.get(i).getRating());
-        }
-
-
+        years = movies.stream()
+                .map(Movie::getReleaseYear)
+                .collect(Collectors.toList());
+        ratings = movies.stream()
+                .map(Movie::getRating)
+                .collect(Collectors.toList());
     }
 
     public void initializeLayout() {
@@ -164,7 +159,7 @@ public class HomeController implements Initializable {
         //The following ~20 Lines check if an input is empty or is set to "No filter"
         // If it is empty (or is set to "No filter") it gets changed to: "" to be able to pass it directly to the urlBuilder function in MovieApi.
         //
-        if (searchField.getText().trim().toLowerCase().isEmpty()) {
+        if (searchField.getText().trim().isEmpty()) {
             searchQuery = "";
         } else
             searchQuery = searchField.getText().trim().toLowerCase();
@@ -198,17 +193,15 @@ public class HomeController implements Initializable {
     }
 
 
-    public void searchBtnClicked(ActionEvent actionEvent) {
+
+
+    public void filterBtnClicked() {
 
         applyAllFilters();
-        // applyAllFiltersViaApi(movieApi.createUrl(searchQuery,genre.toString(),selectedYear,selectedRating));
-
-
-        sortMovies(sortedState);
     }
 
 
-    public void sortBtnClicked(ActionEvent actionEvent) {
+    public void sortBtnClicked() {
         sortMovies();
     }
 

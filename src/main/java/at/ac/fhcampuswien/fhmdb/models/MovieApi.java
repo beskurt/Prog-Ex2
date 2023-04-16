@@ -9,16 +9,14 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class MovieApi {
 
 
     // if you make this function happy you get a sexy Url
-    public String createUrl(String query, String genre, String year, String rating) {
+    public String createUrl(String query, String genre, String releaseYear, String ratingFrom) {
         StringBuilder url = new StringBuilder("http://localhost:8080/movies");
 
-        // TODO: Make working Filters (no ors, we need ands).
         if (!query.isEmpty()  ) {               //TODO Disallow Numbers and Special character in query
 
             // ReplaceAll Whitespaces and Tabs with "%20"
@@ -27,12 +25,12 @@ public class MovieApi {
         if (!genre.isEmpty()) {
             url.append("?genre=").append(genre).append("&");
         }
-        if (!year.isEmpty()) {
-            url.append("?year=").append(year).append("&");
+        if (!releaseYear.isEmpty()) {
+            url.append("?releaseYear=").append(releaseYear).append("&");
         }
 
-        if (!rating.isEmpty()) {
-            url.append("?rating=").append(rating).append("&");
+        if (!ratingFrom.isEmpty()) {
+            url.append("?ratingFrom=").append(ratingFrom).append("&");
         }
         // Remove the trailing "&" character if there are any parameters
         if (url.charAt(url.length() - 1) == '&') {
