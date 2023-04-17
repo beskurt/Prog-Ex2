@@ -18,7 +18,6 @@ public class MovieApi {
     public String createUrl(String query, String genre, String year, String rating) {
         StringBuilder url = new StringBuilder("http://localhost:8080/movies");
 
-        // TODO: Maybe numbers and Symbols restriction
         url.append("?query=").append(query);
         if (!genre.isEmpty()) {
             url.append("&genre=").append(genre);
