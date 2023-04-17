@@ -95,11 +95,6 @@ public class Movie {
     }
 
 
-
-
-
-
-
     public static List<Movie> initializeMovies() throws IOException {
 
         List<Movie> movies;

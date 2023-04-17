@@ -104,7 +104,6 @@ public class HomeController implements Initializable {
         directorCount.setText(countMoviesFrom(allMovies, selectedDirector.toString()) + " Movies are made by this director");
 
 
-
         Object[] genres = Genre.values();   // get all genres
         genreComboBox.getItems().addAll(genres);    // add all genres to the combobox
         genreComboBox.getItems().add("No filter");  // add "no filter" to the combobox
@@ -200,8 +199,6 @@ public class HomeController implements Initializable {
     }
 
 
-
-
     public void filterBtnClicked() {
 
         applyAllFilters();
@@ -241,16 +238,10 @@ public class HomeController implements Initializable {
 
     }
 
-    // TODO: Something like this, need to get it to work + implement
     public long countMoviesFrom(List<Movie> movies, String director) {
         return movies.stream()
                 .filter(movie -> movie.getDirectors().equals(director))
                 .count();
-    }
-
-    int getLongestMovieTitle(List<Movie> movies) {
-
-        return 0;
     }
 
 
