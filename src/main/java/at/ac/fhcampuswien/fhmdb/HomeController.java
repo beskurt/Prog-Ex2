@@ -101,7 +101,9 @@ public class HomeController implements Initializable {
             countLabel.setText("Showing " + count + " items");
         });
 
-        directorCount.setText(countMoviesFrom(allMovies, selectedDirector.toString()) + " Movies are made by this director");
+
+        long count = countMoviesFrom(allMovies, selectedDirector.toString());
+        directorCount.setText(count + " Movies are made by this director");
 
 
         Object[] genres = Genre.values();   // get all genres
@@ -225,22 +227,12 @@ public class HomeController implements Initializable {
 
 
     String getMostPopularActor(List<Movie> movies) {
-
-        List<String> actors = movies.stream()
-                .flatMap(movie -> movie.getMainCast().stream()).toList();
-
-        Map<String, Long> actorCounts = actors.stream()
-                .collect(Collectors.groupingBy(actor -> actor, Collectors.counting()));
-
-        Optional<Map.Entry<String, Long>> mostPopularActor = actorCounts.entrySet().stream()
-                .max(Map.Entry.comparingByValue());
-        return mostPopularActor.map(Map.Entry::getKey).orElse(null);
-
+            return null;
     }
 
-    public long countMoviesFrom(List<Movie> movies, String director) {
-        return movies.stream()
-                .filter(movie -> movie.getDirectors().equals(director))
+    public static long countMoviesFrom(List<Movie> movies, String director) {
+       return movies.stream()
+                .filter(movie -> movie.getDirectors().contains(director))
                 .count();
     }
 
