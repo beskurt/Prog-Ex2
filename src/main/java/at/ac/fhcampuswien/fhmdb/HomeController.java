@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class HomeController implements Initializable {
@@ -226,9 +227,17 @@ public class HomeController implements Initializable {
 //        Die Funktionen sind ausschließlich mit Streams zu implementieren (keine Schleifen!)
 
 
-    String getMostPopularActor(List<Movie> movies) {
-            return null;
+    public static String getMostPopularActor(List<Movie> movies) {
+        Map<String, Long> actorCount = movies.stream()
+                .flatMap(movie -> movie.getMainCast().stream())
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        return actorCount.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse(null);
     }
+
 
     public static long countMoviesFrom(List<Movie> movies, String director) {
        return movies.stream()
