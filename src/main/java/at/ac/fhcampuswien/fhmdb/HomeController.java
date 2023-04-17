@@ -244,6 +244,12 @@ public class HomeController implements Initializable {
                 .count();
     }
 
+    public int getLongestMovieTitle(List<Movie> movies) {
+        return movies.stream()
+                .mapToInt(movie -> movie.getTitle().length())
+                .max()
+                .orElse(0);
+    }
 
 
     List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
