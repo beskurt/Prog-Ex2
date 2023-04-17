@@ -82,9 +82,11 @@ public class HomeController implements Initializable {
     public static void extractDropdownMenuItemsFromApi(List<Movie> movies) {
         years = movies.stream()
                 .map(Movie::getReleaseYear)
+                .distinct()
                 .collect(Collectors.toList());
         ratings = movies.stream()
                 .map(Movie::getRating)
+                .distinct()
                 .collect(Collectors.toList());
     }
 
@@ -116,8 +118,7 @@ public class HomeController implements Initializable {
         // Released Year
 
         // add all release years to the combobox (excluding duplicates)
-        List<Integer> uniqueYears = years.stream().distinct().collect(Collectors.toList());
-        releaseYearComboBox.getItems().addAll(uniqueYears);
+        releaseYearComboBox.getItems().addAll(years);
         releaseYearComboBox.getItems().sort(Comparator.reverseOrder());
         releaseYearComboBox.getItems().add("No filter");  // add "no filter" to the combobox
         releaseYearComboBox.setPromptText("Filter by Release Year");
@@ -126,8 +127,7 @@ public class HomeController implements Initializable {
         // RATING
 
         // add all ratings to the combobox (excluding duplicates)
-        List<Double> uniqueRatings = ratings.stream().distinct().collect(Collectors.toList());
-        ratingComboBox.getItems().addAll(uniqueRatings);
+        ratingComboBox.getItems().addAll(ratings);
         ratingComboBox.getItems().sort(Comparator.reverseOrder());
         ratingComboBox.getItems().add("No filter");  // add "no filter" to the combobox
         ratingComboBox.setPromptText("Filter by Rating");
