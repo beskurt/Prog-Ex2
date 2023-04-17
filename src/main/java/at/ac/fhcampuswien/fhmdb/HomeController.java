@@ -233,14 +233,19 @@ public class HomeController implements Initializable {
 
     }
 
+    // TODO: Something like this, need to get it to work + implement
+    public long countMoviesFrom(List<Movie> movies, String director) {
+        return movies.stream()
+                .filter(movie -> movie.getdirectors().equals(director))
+                .count();
+    }
+
     int getLongestMovieTitle(List<Movie> movies) {
 
         return 0;
     }
 
-    long countMoviesFrom(List<Movie> movies, String director) {
-        return 0;
-    }
+
 
     List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
 

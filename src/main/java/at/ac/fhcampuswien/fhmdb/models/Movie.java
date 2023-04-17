@@ -78,7 +78,7 @@ public class Movie {
         return lengthInMinutes;
     }
 
-    public List<String> getDirectors() {
+    public List<String> getdirectors() {
         return directors;
     }
 
