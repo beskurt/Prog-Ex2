@@ -101,7 +101,7 @@ public class HomeController implements Initializable {
             countLabel.setText("Showing " + count + " items");
         });
 
-
+        //This should show the amount of Movies by a director
         long count = countMoviesFrom(allMovies, selectedDirector.toString());
         directorCount.setText(count + " Movies are made by this director");
 
@@ -113,8 +113,8 @@ public class HomeController implements Initializable {
 
 
         // Released Year
-        // find
-        // add all release years to the combobox
+
+        // add all release years to the combobox (excluding duplicates)
         List<Integer> uniqueYears = years.stream().distinct().collect(Collectors.toList());
         releaseYearComboBox.getItems().addAll(uniqueYears);
         releaseYearComboBox.getItems().sort(Comparator.reverseOrder());
@@ -124,7 +124,7 @@ public class HomeController implements Initializable {
 
         // RATING
 
-        // add all ratings to the combobox
+        // add all ratings to the combobox (excluding duplicates)
         List<Double> uniqueRatings = ratings.stream().distinct().collect(Collectors.toList());
         ratingComboBox.getItems().addAll(uniqueRatings);
         ratingComboBox.getItems().sort(Comparator.reverseOrder());
@@ -245,8 +245,12 @@ public class HomeController implements Initializable {
 
 
     List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
-
-        return movies;
+        if(movies == null){
+            throw new IllegalArgumentException("You have to choose a Movie!");
+        }
+        return movies.stream()
+                .filter(movie -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
+                .collect(Collectors.toList());
     }
 }
 
