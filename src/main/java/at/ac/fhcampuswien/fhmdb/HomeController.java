@@ -38,6 +38,10 @@ public class HomeController implements Initializable {
     @FXML
     public JFXComboBox ratingComboBox;
 
+    public TextField selectedDirector;
+
+    public Label directorCount;
+
     @FXML
     public JFXButton sortBtn;
 
@@ -96,6 +100,9 @@ public class HomeController implements Initializable {
             int count = movieListView.getItems().size();
             countLabel.setText("Showing " + count + " items");
         });
+
+        directorCount.setText(countMoviesFrom(allMovies, selectedDirector.toString()) + " Movies are made by this director");
+
 
 
         Object[] genres = Genre.values();   // get all genres
@@ -198,6 +205,7 @@ public class HomeController implements Initializable {
     public void filterBtnClicked() {
 
         applyAllFilters();
+        countMoviesFrom(allMovies, selectedDirector.toString());
     }
 
 
@@ -236,7 +244,7 @@ public class HomeController implements Initializable {
     // TODO: Something like this, need to get it to work + implement
     public long countMoviesFrom(List<Movie> movies, String director) {
         return movies.stream()
-                .filter(movie -> movie.getdirectors().equals(director))
+                .filter(movie -> movie.getDirectors().equals(director))
                 .count();
     }
 
